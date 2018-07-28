@@ -4,17 +4,7 @@ import java.util.Map;
 /**
  * @author weicc
  * @create 2018-07-27 15:19
- * <p>
- * Given a string, find the length of the longest substring without repeating characters.
- * <p>
- * Examples:
- * <p>
- * Given "abcabcbb", the answer is "abc", which the length is 3.
- * <p>
- * Given "bbbbb", the answer is "b", with the length of 1.
- * <p>
- * Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring,
- * "pwke" is a subsequence and not a substring.
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
  **/
 public class Longest_Substring_Without_Repeating_Characters {
     public static int lengthOfLongestSubstring(String s) {

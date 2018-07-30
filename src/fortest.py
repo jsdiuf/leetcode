@@ -1,16 +1,22 @@
-import time
-arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-       'v', 'w', 'x', 'y', 'z']
-p=".*dd..*ea*a*a*w.fr....fr.e*.*d*.we.*..***.**.a*a**.*b"
-c="a"
-print(c.islower())
-for i in arr:
-    while "..*" in p or ".*." in p or "**" in p or (i + "*.*") in p or ".*" + i+"*" in p or (i + "*" + i + "*") in p:
-        p = p.replace("..*", ".*")
-        p = p.replace(".*.", ".*")
-        p = p.replace("**", "*")
-        p = p.replace(i + "*.*", ".*")
-        p = p.replace(".*" + i+"*", ".*")
-        p = p.replace(i + "*" + i + "*", i + "*")
-print(time.time())
-print(p)
+class Solution(object):
+    def isMatch(self, text, pattern):
+        memo = {}
+        def dp(i, j):
+            if (i, j) not in memo:
+                if j == len(pattern):
+                    ans = i == len(text)
+                else:
+                    first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                    if j+1 < len(pattern) and pattern[j+1] == '*':
+                        ans = dp(i, j+2) or first_match and dp(i+1, j)
+                    else:
+                        ans = first_match and dp(i+1, j+1)
+
+                memo[i, j] = ans
+            return memo[i, j]
+
+        return dp(0, 0)
+
+
+s=Solution()
+print(s.isMatch("aaaaaaaaaaaaab","a*a*a*a*a*a*a*a*a*a*c"))

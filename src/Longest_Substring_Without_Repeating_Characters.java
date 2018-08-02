@@ -21,6 +21,7 @@ public class Longest_Substring_Without_Repeating_Characters {
 
 
             if (map.containsKey(s.charAt(i))) {
+                //如果i指向的字符在很前面 如果不加和j取最大  j很容易跑到前面去了
                 j = Math.max(j, map.get(s.charAt(i)) + 1);
             }
         }

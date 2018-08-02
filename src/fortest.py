@@ -1,1 +1,2 @@
-print(len([0,0,0,0]))
+for i in range(1,9):
+    print(i)

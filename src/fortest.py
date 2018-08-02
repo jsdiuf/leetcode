@@ -1,2 +1,4 @@
-for i in range(1,9):
-    print(i)
+i=8
+j=2
+i+=j+2
+print(i)

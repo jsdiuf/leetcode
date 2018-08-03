@@ -1,5 +1,6 @@
 
 a=[1,2,3]
 
-a.pop()
-print(a.isEmpty())
+
+
+print("a"*2)

@@ -55,10 +55,7 @@ class Solution:
             return False
         while '()' in s or '{}' in s or '[]' in s:
             s = s.replace('{}', '').replace('()', '').replace('[]', '')
-        if s == '':
-            return True
-        else:
-            return False
+        return s == ''
 
 
 s = Solution()

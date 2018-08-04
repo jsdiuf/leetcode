@@ -1,6 +1,5 @@
+arr=[1,2,3,4]
 
-a=[1,2,3]
+arr[0],arr[1]=arr[1],arr[0]
 
-
-
-print("a"*2)
+print(arr)

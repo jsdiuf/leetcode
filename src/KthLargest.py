@@ -15,7 +15,12 @@ class KthLargest:
         :type nums: List[int]
         """
         self.k=k
-        self.heap=heapq.heapify(nums)
+        self.heap=nums
+        heapq.heapify(self.heap)
+        reduce=len(nums)-k
+        while reduce>0:
+            heapq.heappop(self.heap)
+            reduce-=1
 
     def add(self, val):
         """
@@ -23,14 +28,16 @@ class KthLargest:
         :rtype: int
         """
         heapq.heappush(self.heap, val)
-        return self.heap[self.k]
+        if len(self.heap)>self.k:
+           heapq.heappop(self.heap)
+        return self.heap[0]
 
 
-s=KthLargest(3,[4,5,8,2])
-print(s.add(3))
-print(s.add(5))
-print(s.add(10))
-print(s.add(9))
+s=KthLargest(2,[1])
+print(s.add(-3))
+print(s.add(-2))
+print(s.add(-4))
+print(s.add(0))
 print(s.add(4))
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)

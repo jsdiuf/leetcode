@@ -3,6 +3,7 @@
 @author: jsdiuf
 @contact: weichun713@foxmail.com
 @time: 2018-8-5 18:09
+https://leetcode.com/submissions/detail/167717794/
 """
 
 
@@ -16,11 +17,9 @@ class Solution:
 
         if len(nums) == 0:
             return 0
-
         right = len(nums) - 1
         left = 0
         while left < right:
-
             while left < right and nums[right] == val:
                 right -= 1
                 continue
@@ -32,6 +31,15 @@ class Solution:
             return 0
         return left + 1
 
+    # perfect
+    def fun2(self, nums, val):
+        begin = 0
+        for e in nums:
+            if e != val:
+                nums[begin] = e
+                begin += 1
+        return begin
+
 
 s = Solution()
-print(s.removeElement([3, 2, 2, 3], 3))
+print(s.fun2([3, 3, 3, 3], 2))

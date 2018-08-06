@@ -1,3 +1,2 @@
-map={}
-map[1]=[1]
-print(map[1])
+a,b=1,2
+print(a,b)

@@ -4,6 +4,7 @@
 @contact: weichun713@foxmail.com
 @time: 2018-8-5 21:35
 """
+import queue
 
 """
         F
@@ -91,6 +92,39 @@ class Solution:
         postTraver(root, list)
         return list
 
+    # 广度优先搜索 Breadth First Search  BFS
+    def BFSTraver(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+
+        1初始化一个队列，并把根结点入列队；
+
+        2当队列为非空时，循环执行步骤3到步骤5，否则执行6；
+
+        3出队列取得一个结点，访问该结点；
+
+        4若该结点的左子树为非空，则将该结点的左子树入队列；
+
+        5若该结点的右子树为非空，则将该结点的右子树入队列；
+
+        6结束。
+        """
+        if root is None:
+            return []
+        list = []
+        q = queue.Queue()
+        q.put(root)
+        while q.empty() is False:
+            node = q.get()
+            # 访问
+            list.append(node.val)
+            if node.left:
+                q.put(node.left)
+            if node.right:
+                q.put(node.right)
+        return list
+
 
 a = TreeNode("A")
 b = TreeNode("B")
@@ -118,3 +152,4 @@ s = Solution()
 print(s.preorderTraversal(f))
 print(s.inorderTraversal(f))
 print(s.postorderTraversal(f))
+print(s.BFSTraver(f))

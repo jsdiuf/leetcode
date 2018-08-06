@@ -1,2 +1,3 @@
-a="abcdef"
-print(a[2:3])
+map={}
+map[1]=[1]
+print(map[1])

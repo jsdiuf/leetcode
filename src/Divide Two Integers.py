@@ -15,8 +15,9 @@ class Solution:
         :type divisor: int
         :rtype: int
         """
-        return sys.maxsize
+        return 1
 
 
 s = Solution()
 print(s.divide(1, 2))
+print(23423424242342344234)

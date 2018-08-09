@@ -1,4 +1,9 @@
-arr=[2,3,4,6,3,2]
+from pip._vendor.progress.counter import Stack
 
-for idx ,val in enumerate(arr):
-    print(idx,val)
+s=Stack()
+s.append(1)
+s.append(2)
+print(s.pop())
+print(s.pop())
+print(s.pop())
+print(len(s))

@@ -28,7 +28,7 @@ class Solution:
         q = queue.Queue()
 
         q.put(root)
-        while q.empty() is False:
+        while not q.empty():
 
             n = q.qsize()
             t = []

@@ -29,35 +29,27 @@ class Solution:
         :type t: int 最大差值
         :rtype: bool
         """
-        d={}
-
-        for idx,val in enumerate(nums):
-
-
-            d[val]=idx
-
-        return False
-
-    def containsNearbyAlmostDuplicate2(self, nums, k, t):
-        if t < 0: return False
-        n = len(nums)
         d = {}
-        w = t + 1
-        for i in range(n):
-            m = nums[i] / w
-            if m in d:
+        div = t
+        if t == 0:
+            div = 1
+        if t < 0:
+            return False
+        for idx, val in enumerate(nums):
+            key = val // div
+
+            if key in d:
                 return True
-            if m - 1 in d and abs(nums[i] - d[m - 1]) < w:
+            if key - 1 in d and abs(nums[d[key - 1]] - val) <= t:
                 return True
-            if m + 1 in d and abs(nums[i] - d[m + 1]) < w:
+            if key + 1 in d and abs(nums[d[key + 1]] - val) <= t:
                 return True
-            d[m] = nums[i]
-            if i >= k: del d[nums[i - k] / w]
+            d[key] = idx
+            if idx >= k:
+                del d[nums[idx - k] // div]
         return False
 
 
 s = Solution()
-print(time.time())
-print(s.containsNearbyDuplicate([1, 0, 1, 1], 1))
+print(s.containsNearbyAlmostDuplicate([-1, -1], 1, 1))
 # print(s.containsNearbyAlmostDuplicate2([], 10000, 0))
-print(time.time())

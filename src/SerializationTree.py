@@ -23,6 +23,20 @@ class Solution:
 
         :type root: TreeNode
         :rtype: str
+
+
+            out = []
+
+            def helper(node):
+                if node is None:
+                    out.append("null")
+                    return
+                out.append(node.val)
+                helper(node.left)
+                helper(node.right)
+
+            helper(root)
+            return out
         """
         if not root:
             return []
@@ -40,11 +54,23 @@ class Solution:
             list = list[:-1]
         return list
 
+
     def deserialize(self, data):
         """Decodes your encoded data to tree.
 
         :type data: str
         :rtype: TreeNode
+
+        data_it = iter(data)
+        def helper():
+            val = next(data_it)
+            if val == "null":
+                return None
+            nd = TreeNode(val)
+            nd.left = helper()
+            nd.right = helper()
+            return nd
+        return helper()
         """
         if len(data)==0:
             return None

@@ -19,80 +19,29 @@ class Solution:
         """
         if not dislikes:
             return True
-        dic = {}
+        bag = [[] for i in range(0, N + 1)]
         for item in dislikes:
-            if item[0] not in dic:
-                s = set()
-                s.add(item[1])
-                dic[item[0]] = s
-            else:
-                dic[item[0]].add(item[1])
-        color = [-1] * (N + 1)
+            bag[item[0]].append(item[1])
+            bag[item[1]].append(item[0])
+        dept = [-1] * (N + 1)
 
-        left = set()
-        right = set()
-        putl = True
-        for e in dic:
-            if not left and not right:
-                left.add(e)
-                right = dic[e]
-            if putl:
-                for i in dic[e]:
-                    if i in left:
-                        return False
-                    left.add(i)
-            if not putl:
-                for i in dic[e]:
-                    pass
-
-    def possibleBipartition2(self, N, dislikes):
-        bag = [[] for i in range(N + 1)]
-        visited = [-1] * (N + 1)
-
-        for dislike in dislikes:
-            bag[dislike[0]].append(dislike[1])
-            bag[dislike[1]].append(dislike[0])
-
-        for i in range(1, N + 1):
-            if len(bag[i]) > 0:
-                break
-
-        return self.visit(0, i, bag, visited)
-
-    def visit(self, curLevel, i, bag, visited):
-        if visited[i] >= 0:
-            return (curLevel - visited[i]) % 2 == 0
-
-        visited[i] = curLevel
-        for des in bag[i]:
-            if not self.visit(curLevel + 1, des, bag, visited):
+        def dfs(n, l):
+            if dept[n] != -1:
+                return (dept[n] - l) % 2 == 0
+            dept[n] = l
+            for e in bag[n]:
+                if not dfs(e, l + 1):
+                    return False
+            return True
+        for idx, val in enumerate(bag):
+            if dept[idx] != -1 or not val:
+                continue
+            if not dfs(idx, 0):
                 return False
-        return True
-
-    def possibleBipartition3(self, N, dislikes):
-        edges = [[]] * N
-        for pair in dislikes:
-            edges[pair[0] - 1].append(pair[1] - 1)
-            edges[pair[1] - 1].append(pair[0] - 1)
-
-        team = [-1] * N
-        for i, p in enumerate(team):
-            if p == -1:
-                team[i] = 0
-                q = collections.deque()
-                q.append(i)
-                while len(q):
-                    pre = q.popleft()
-                    for j in edges[pre]:
-                        if team[j] == -1:
-                            team[j] = 1 - team[pre]
-                            q.append(j)
-                        elif team[j] == team[pre]:
-                            return False
         return True
 
 
 s = Solution()
 print(time.time())
-print(s.possibleBipartition3(15, [[1, 2], [1, 3], [10, 11], [11, 12], [10, 12]]))
+print(s.possibleBipartition(5, [[1,2],[2,3],[3,4],[4,5],[1,5]]))
 print(time.time())

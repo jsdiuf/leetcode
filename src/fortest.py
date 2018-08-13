@@ -1,3 +1,11 @@
-a=[]
+a=set()
+print(not a)
+print(a.add(1))
+print(1 in a)
+a.add(2)
+print(not a)
 
-print(a[0])
+for e in a:
+    print(e)
+
+print(-3%2)

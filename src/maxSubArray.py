@@ -33,7 +33,6 @@ class Solution:
             return None
         maxnum = nums[0]
         maxendwithi = nums[0]
-
         for i in range(1, len(nums)):
             maxendwithi = max(maxendwithi + nums[i], nums[i])
             maxnum = max(maxendwithi, maxnum)

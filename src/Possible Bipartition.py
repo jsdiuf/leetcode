@@ -4,7 +4,6 @@
 @contact: weichun713@foxmail.com
 @time: 2018-8-12 12:59
 """
-import collections
 import time
 
 

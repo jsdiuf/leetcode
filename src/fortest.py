@@ -1,6 +1,2 @@
-a=1
-b=a
-b=3
-
-
-print(a)
+a="asd"
+print(a[1])

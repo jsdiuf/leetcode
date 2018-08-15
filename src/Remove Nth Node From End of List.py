@@ -13,25 +13,25 @@ class ListNode:
 
 
 class Solution:
+
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
         :type n: int
         :rtype: ListNode
         """
-        if head.next is None:
+        if not head.next:
             return None
-        pre = ListNode("")
+        pre = fast = slow = ListNode("")
         pre.next = head
-        p1 = pre
-        p2 = pre
-        while p1 and n >= 0:
-            p1 = p1.next
+
+        while fast and n >= 0:
+            fast = fast.next
             n -= 1
-        while p1:
-            p1 = p1.next
-            p2 = p2.next
-        p2.next = p2.next.next
+        while fast:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
         return pre.next
 
 

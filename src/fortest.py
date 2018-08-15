@@ -1,2 +1,2 @@
-a="asd"
-print(a[1])
+a=[]
+print(not a)

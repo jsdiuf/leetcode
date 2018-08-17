@@ -29,6 +29,7 @@ class Solution(object):
         """
         :type head: Node
         :rtype: Node
+        还可以用栈做 stack
         """
 
         def dfs(cur):

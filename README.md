@@ -1,3 +1,2 @@
 # leetcode
-leetcode
-记录leetcode上做题学习
+leetcode习题练习

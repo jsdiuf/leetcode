@@ -1,8 +1,2 @@
-nums=[1,2]
-i, j = 0, len(nums) - 1
-while i < j:
-    if nums[i] != nums[j]:
-        print(False)
-    i += 1
-    j -= 1
-print(True)
+a=[1,2,3,4]
+print(3>>1)

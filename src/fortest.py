@@ -1,2 +1,5 @@
-a=[1,2,3,4]
-print(3>>1)
+a=set()
+a.add(1)
+print(a)
+a.remove(1)
+print(a)

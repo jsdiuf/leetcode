@@ -83,5 +83,6 @@ class Solution:
                 ans += 2
         return ans
 
+
 s=Solution()
 print(s.surfaceArea([[2,2,2],[2,1,2],[2,2,2]]))

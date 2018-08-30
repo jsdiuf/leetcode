@@ -43,12 +43,12 @@ class MinHeap():
 
     # 弹出 数组头尾互换  头下沉
     def pop(self):
-        if self.count>1:
-           ret=self.arr[0]
-           self.arr[0]=self.arr[self.count-1]
-           self.count-=1
-           self.shift_down(1)
-           return ret
+        if self.count > 1:
+            ret = self.arr[0]
+            self.arr[0] = self.arr[self.count - 1]
+            self.count -= 1
+            self.shift_down(1)
+            return ret
 
 
 s = MinHeap([])

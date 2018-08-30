@@ -5,28 +5,12 @@ from matplotlib.pyplot import imshow, show
 from numba import jit
 
 
-def mandel(x, y, max_iters):
-    """
-      Given the real and imaginary parts of a complex number,
-      determine if it is a candidate for membership in the Mandelbrot
-      set given a fixed number of iterations.
-    """
-    c = complex(x, y)
-    z = 0.0j
-    for i in range(max_iters):
-        z = z * z + c
-        if (z.real * z.real + z.imag * z.imag) >= 4:
-            return i
-
-    return max_iters
-
-
 @jit
 def mandel(x, y, max_iters):
     """
-      Given the real and imaginary parts of a complex number,
-      determine if it is a candidate for membership in the Mandelbrot
-      set given a fixed number of iterations.
+      1，判断N=x+yi这个复数 的模是否大于2 是返回0
+      2，如果不是则将此复数变为N=N^2+N继续测试直到满足条件返回迭代的次数
+      3，达到最大迭代数 返回最大迭代数
     """
     c = complex(x, y)
     z = 0.0j
@@ -61,8 +45,9 @@ def main():
     dt = timer() - start
 
     print("Mandelbrot created in %f s" % dt)
-    #imshow(image)
-    #show()
+    imshow(image)
+    show()
+
 
 if __name__ == '__main__':
     main()

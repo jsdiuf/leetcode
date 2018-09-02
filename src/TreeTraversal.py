@@ -39,15 +39,11 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-        if root is None:
-            return []
         list = []
-
         def preTraver(root, list):
-            list.append(root.val)
-            if root.left:
+            if root:
+                list.append(root.val)
                 preTraver(root.left, list)
-            if root.right:
                 preTraver(root.right, list)
 
         preTraver(root, list)
@@ -105,11 +101,13 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
+
         def inTraver(root, list):
             if root:
                 inTraver(root.left, list)
                 list.append(root.val)
                 inTraver(root.right, list)
+
         list = []
         inTraver(root, list)
         return list
@@ -142,14 +140,17 @@ class Solution:
                 postTraver(root.left, list)
                 postTraver(root.right, list)
                 list.append(root.val)
+
         postTraver(root, list)
         return list
-    #stack
+
+    # stack
     def postorderTraversal2(self, root):
 
-        list,stack=[],[]
+        list, stack = [], []
 
         pass
+
     # 广度优先搜索 Breadth First Search  BFS
     def BFSTraver(self, root):
         """
@@ -207,10 +208,10 @@ g.right = i
 i.left = h
 
 s = Solution()
-# print(s.preorderTraversal(f))
+print(s.preorderTraversal(f))
 # print(s.inorderTraversal(f))
-print(s.postorderTraversal(f))
+# print(s.postorderTraversal(f))
 
 # print(s.BFSTraver(f))
 # print(s.preorderTraversal4(f))
-#print(s.inorderTraversal(f))
+# print(s.inorderTraversal(f))

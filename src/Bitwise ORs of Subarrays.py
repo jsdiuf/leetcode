@@ -46,17 +46,27 @@ class Solution:
         """
         :type A: List[int]
         :rtype: int
+        [1,2,3,4,|5,6]
         """
         if not A:
             return 0
         ans = set()
-
+        pre = set()
         for i in range(len(A)):
-            t = 0
-            for j in range(i, -1, -1):
-                t |= A[j]
-                ans.add(t)
+            pre.add(A[i])
+            pre = {A[i] | e for e in pre}
+            ans |= pre
         return len(ans)
 
-s=Solution()
-print(s.subarrayBitwiseORs([1,1,2]))
+    """
+    
+        res, cur = set(), {0}
+        for i in A:
+            cur = {i | j for j in cur} | {i}
+            res |= cur
+        return len(res)
+    """
+
+
+s = Solution()
+print(s.subarrayBitwiseORs([1, 2, 4]))

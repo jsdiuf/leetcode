@@ -1,3 +1,1 @@
-a="abcd"
-
-print(a)
+print(sum([1,2,3]))

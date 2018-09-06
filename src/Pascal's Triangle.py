@@ -56,4 +56,4 @@ class Solution:
 
 
 s = Solution()
-print(s.generate2(6))
+print(s.generate2(33))

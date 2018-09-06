@@ -1,3 +1,6 @@
-a=[1,2,3,4,5]
-a[:2],a[2:]=a[-2:],a[:3]
-print(a)
+s="    123456  dwd   ddwd    "
+s=s.split()
+arr=[e[::-1] for e in s]
+print(arr)
+
+

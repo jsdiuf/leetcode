@@ -35,7 +35,7 @@ def create_fractal(min_x, max_x, min_y, max_y, image, iters):
 
 
 def main():
-    image = np.zeros((100, 100), dtype=np.uint8)
+    image = np.zeros((2000, 2000), dtype=np.uint8)
     start = timer()
     create_fractal(-2.0, 1.0, -1.0, 1.0, image, 20)
     dt = timer() - start

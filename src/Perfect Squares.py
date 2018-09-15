@@ -17,6 +17,8 @@ Input: n = 13
 Output: 2
 Explanation: 13 = 4 + 9.
 """
+import time
+from math import sqrt
 
 
 class Solution:
@@ -25,24 +27,20 @@ class Solution:
         :type n: int
         :rtype: int
         """
-
-        def helper(N):
-            l, r = 1, N
-            while l <= r:
-                m = (l + r) // 2
-                if m ** 2 <= N and (m + 1) ** 2 > N:
-                    return N - m ** 2
-                if m ** 2 < N:
-                    l = m + 1
-                else:
-                    r = m - 1
-
-        count = 0
-        while n:
-            count += 1
-            n = helper(n)
-        return count
+        end = int(sqrt(n))
+        if end * end == n:
+            return 1
+        dp = [float('inf')] * (n+1)
+        dp[0] = 0
+        for i in range(n + 1):
+            j = 1
+            while i - j * j >= 0:
+                dp[i] = min(dp[i], dp[i - j * j] + 1)
+                j += 1
+        return dp[n]
 
 
 s = Solution()
-print(s.numSquares(13))
+print(time.time())
+print(s.numSquares(3081))
+print(time.time())

@@ -20,8 +20,8 @@ class Color(Enum):
 
 
 class BRNode:
-    def __init__(self, val):
-        self.color = None
+    def __init__(self, val, color):
+        self.color = color
         self.val = val
         self.left = None
         self.right = None
@@ -31,6 +31,7 @@ class BRNode:
 class BRTree:
     def __init__(self):
         self.root = None
+        self.nil = BRNode(0, Color.BLACK)
 
     """
        node                 r                    
@@ -42,7 +43,7 @@ class BRTree:
 
     def print(self, root):
         if root:
-            print(root.val)
+            print(root.val, root.color)
             self.print(root.left)
             self.print(root.right)
         pass
@@ -103,24 +104,96 @@ class BRTree:
         l.right = node
         node.parent = l
 
+    def insert(self, val):
 
-X = BRNode("X")
-Y = BRNode("Y")
-a = BRNode("a")
-b = BRNode("b")
-c = BRNode("c")
+        if not self.root:
+            self.root = BRNode(val, Color.BLACK)
+            self.root.left = self.nil
+            self.root.right = self.nil
+            return
+        cur = self.root
+        while cur:
+            if cur.val > val:
+                if cur.left != self.nil:
+                    cur = cur.left
+                else:
+                    cur.left = n = BRNode(val, Color.RED)
+                    n.parent = cur
+                    n.left = self.nil
+                    n.right = self.nil
+                    cur = cur.left
+                    break
+            else:
+                if cur.right != self.nil:
+                    cur = cur.right
+                else:
+                    cur.right = n = BRNode(val, Color.RED)
+                    n.parent = cur
+                    n.left = self.nil
+                    n.right = self.nil
+                    cur = cur.right
+                    break
+        self.RBInsertFixup(cur)
+        """
+        case 0 父节点为黑  直接返回
+        
+        Case 1	当前节点的父节点是红色，且当前节点的祖父节点的另一个子节点（叔叔节点）也是红色。	
+               (01) 将“父节点”设为黑色。
+               (02) 将“叔叔节点”设为黑色。
+               (03) 将“祖父节点”设为“红色”。
+               (04) 将“祖父节点”设为“当前节点”(红色节点)；即，之后继续对“当前节点”进行操作。
+               
+        Case 2	当前节点的父节点是红色，叔叔节点是黑色，且当前节点是其父节点的右孩子	
+               (01) 将“父节点”作为“新的当前节点”。
+               (02) 以“新的当前节点”为支点进行左旋。
+               
+        Case 3	当前节点的父节点是红色，叔叔节点是黑色，且当前节点是其父节点的左孩子	
+               (01) 将“父节点”设为“黑色”。
+               (02) 将“祖父节点”设为“红色”。
+               (03) 以“祖父节点”为支点进行右旋。
+        """
 
-X.left = a
-a.parent = X
-X.right = Y
-Y.parent = X
-Y.left = b
-b.parent = Y
-Y.right = c
-c.parent = Y
+    def RBInsertFixup(self, cur):
 
-s = BRTree()
-s.left_roate(X)
-s.print(s.root)
-s.right_roate(Y)
-s.print(s.root)
+        # 父节点为黑直接返回
+        if not cur.parent or cur.parent.color == Color.BLACK:
+            self.root.color = Color.BLACK
+            return
+        if cur.parent == cur.parent.parent.left:  # 待插节点父节点为祖父节点的left
+            u = cur.parent.parent.right
+            if u.color == Color.RED:
+                cur.parent.color = Color.BLACK
+                u.color = Color.BLACK
+                u.parent.color = Color.RED
+                self.RBInsertFixup(u.parent)
+            else:
+                if cur == cur.parent.right:
+                    cur = cur.parent
+                    self.left_roate(cur)
+                cur.parent.color = Color.BLACK
+                cur.parent.parent.color = Color.RED
+                self.right_roate(cur.parent.parent)
+                self.RBInsertFixup(cur)
+        else:
+            u = cur.parent.parent.left
+            if u.color == Color.RED:
+                cur.parent.color = Color.BLACK
+                u.color = Color.BLACK
+                u.parent.color = Color.RED
+                self.RBInsertFixup(u.parent)
+            else:
+                if cur == cur.parent.left:
+                    cur = cur.parent
+                    self.right_roate(cur)
+                cur.parent.color = Color.BLACK
+                cur.parent.parent.color = Color.RED
+                self.left_roate(cur.parent.parent)
+                self.RBInsertFixup(cur)
+
+
+t = BRTree()
+t.insert(1)
+t.insert(2)
+t.insert(3)
+t.insert(7)
+t.print(t.root)

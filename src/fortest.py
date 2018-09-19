@@ -1,3 +1,1 @@
-a=[1,2,3]
-del a[-1]
-print(a)
+print(int(6/-4))

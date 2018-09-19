@@ -7,7 +7,7 @@ https://www.2cto.com/kf/201611/561018.html
 
 1.每个节点或是红色的，或是黑色的。
 2.根节点是黑色的。
-3.每个叶节点（NIL）是黑色的。
+3.每个叶节点（NIL 空节点）是黑色的。
 4.如果一个节点是红色的，则它的俩个字节点都是黑色的。
 5.对每个节点，从该节点到其他所有后代叶节点的简单路径上，均包含相同数目的黑色节点。
 """
@@ -151,6 +151,8 @@ class BRTree:
                (01) 将“父节点”设为“黑色”。
                (02) 将“祖父节点”设为“红色”。
                (03) 以“祖父节点”为支点进行右旋。
+               
+        具体有出入  具体看代码
         """
 
     def RBInsertFixup(self, cur):
@@ -189,6 +191,66 @@ class BRTree:
                 cur.parent.parent.color = Color.RED
                 self.left_roate(cur.parent.parent)
                 self.RBInsertFixup(cur)
+
+    def getNodeByVal(self, val):
+        cur = self.root
+        while cur:
+            if cur.val == val:
+                return cur
+            if cur.val < val:
+                cur = cur.right
+            else:
+                cur = cur.left
+
+    def getMinNode(self, node):
+        while node.left != self.nil:
+            node = node.left
+        return node
+
+    def delete(self, val):
+        node = self.getNodeByVal(val)
+        if not node:
+            return
+        self.RBDelete(node)
+
+    def RBDelete(self, d):
+
+        if d.left == self.nil and d.right == self.nil:  # 左右子节点都为nil
+            if d == self.root:
+                self.root = None
+                return
+            if d == d.parent.left:
+                d.parent.left = self.nil
+            else:
+                d.parent.right = self.nil
+
+        elif d.left == self.nil:  # 左子节点为nil
+            if d == self.root:
+                d.right.parent = None
+                self.root = d.right
+            elif d == d.parent.left:
+                d.parent.left = d.right
+                d.right.parent = d.parent
+            else:
+                d.parent.right = d.right
+                d.right.parent = d.parent
+        elif d.right == self.nil:  # 右子节点为nil
+            if d == self.root:
+                d.left.parent = None
+                self.root = d.left
+            elif d == d.parent.left:
+                d.parent.left = d.left
+                d.left.parent = d.parent
+            else:
+                d.parent.right = d.left
+                d.left.parent = d.parent
+        else:  # 左右子节点都不为nil
+            m = self.getMinNode(d)
+            d.val = m.val
+            self.RBDelete(m)
+
+    def deleteFixUp(self, node):
+        pass
 
 
 t = BRTree()

@@ -50,12 +50,52 @@ class Solution:
     def cloneGraph(self, node):
         if not node:
             return
-        stack=[node]
+        visited = {}
 
-        dummy=cur=UndirectedGraphNode(node.lable)
+        def dfs(n, r):
+            for e in n.neighbors:
+                copy = UndirectedGraphNode(e.label)
+                if e.label not in visited:
+                    r.neighbors.append(copy)
+                    visited[n.label] = copy
+                    dfs(e, copy)
+                else:
+                    r.neighbors.append(visited[n.label])
 
-        while stack:
+        res = UndirectedGraphNode(node.label)
+        visited[node.label] = res
+        dfs(node, res)
+        return res
 
-            pass
+        """
+        visited = {}
+        def cloneHelper(node):
+            if node and node not in visited:
+                newNode = UndirectedGraphNode(node.label)
+                visited[newNode.label] = newNode
+                newNode.neighbors = [visited.get(n.label) or cloneHelper(n) for n in node.neighbors]
+                return newNode
+        return cloneHelper(node)
+        """
 
-        return dummy
+
+s = Solution()
+n1 = UndirectedGraphNode(1)
+n2 = UndirectedGraphNode(2)
+n3 = UndirectedGraphNode(3)
+n4 = UndirectedGraphNode(4)
+n5 = UndirectedGraphNode(5)
+n6 = UndirectedGraphNode(6)
+
+n7 = UndirectedGraphNode(7)
+n8 = UndirectedGraphNode(8)
+n9 = UndirectedGraphNode(9)
+n10 = UndirectedGraphNode(10)
+
+n1.neighbors = [n2, n3, n4]
+n2.neighbors = [n7, n8, n9, n10]
+n3.neighbors = [n5, n6]
+
+n4.neighbors = [n4]
+ret = s.cloneGraph(n1)
+print(1)

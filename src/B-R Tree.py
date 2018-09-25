@@ -214,36 +214,52 @@ class BRTree:
         self.RBDelete(node)
 
     def RBDelete(self, d):
-
+        p = d.parent
+        color = d.color
         if d.left == self.nil and d.right == self.nil:  # 左右子节点都为nil
             if d == self.root:
                 self.root = None
                 return
             if d == d.parent.left:
                 d.parent.left = self.nil
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.left)
             else:
                 d.parent.right = self.nil
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.right)
 
         elif d.left == self.nil:  # 左子节点为nil
             if d == self.root:
                 d.right.parent = None
                 self.root = d.right
+                self.root.color = Color.BLACK
+
             elif d == d.parent.left:
                 d.parent.left = d.right
                 d.right.parent = d.parent
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.left)
             else:
                 d.parent.right = d.right
                 d.right.parent = d.parent
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.right)
         elif d.right == self.nil:  # 右子节点为nil
             if d == self.root:
                 d.left.parent = None
                 self.root = d.left
+                self.root.color = Color.BLACK
             elif d == d.parent.left:
                 d.parent.left = d.left
                 d.left.parent = d.parent
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.left)
             else:
                 d.parent.right = d.left
                 d.left.parent = d.parent
+                if color == Color.BLACK:
+                    self.deleteFixUp(p.right)
         else:  # 左右子节点都不为nil
             m = self.getMinNode(d.right)
             d.val = m.val
@@ -273,7 +289,9 @@ class BRTree:
        (04) 对x的父节点进行左旋。
        (05) 设置“x”为“根节点”。
     """
+
     def deleteFixUp(self, node):
+
         pass
 
 

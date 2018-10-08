@@ -9,36 +9,40 @@
 
 class Solution:
     # quicksort O(N*logN)
-    def quicksort(self, nums,start,end):
+    def quicksort(self, nums, l, r):
 
-        # 判断low是否小于high,如果为false,直接返回
-        if start < end:
-            i, j = start, end
-            # 设置基准数
-            base = nums[i]
+        def sub_sort(array, l, r):
+            key = array[l]
+            while l < r:
+                while l < r and array[r] >= key:
+                    r -= 1
+                while l < r and array[r] < key:
+                    array[l] = array[r]
+                    l += 1
+                    array[r] = array[l]
+            array[l] = key
+            return l
 
-            while i < j:
-                # 如果列表后边的数,比基准数大或相等,则前移一位直到有比基准数小的数出现
-                while (i < j) and (nums[j] >= base):
-                    j = j - 1
+        if l < r:
+            m = sub_sort(nums, l, r)
+            self.quicksort(nums, l, m)
+            self.quicksort(nums, m + 1, r)
 
-                # 如找到,则把第j个元素赋值给第个元素i,此时表中i,j个元素相等
-                    nums[i] = nums[j]
+    def quicksort2(self, qlist):
 
-                # 同样的方式比较前半区
-                while (i < j) and (nums[i] <= base):
-                    i = i + 1
-                    nums[j] = nums[i]
-            # 做完第一轮比较之后,列表被分成了两个半区,并且i=j,需要将这个数设置回base
-                    nums[i] = base
+        if not qlist:
+            return []
+        else:
+            qfirst = qlist[0]
+            qless = self.quicksort2([l for l in qlist[1:] if l < qfirst])
+            qmore = self.quicksort2([m for m in qlist[1:] if m >= qfirst])
+        return qless + [qfirst] + qmore
 
-            # 递归前后半区
-            self.quicksort(nums, start, i - 1)
-            self.quicksort(nums, j + 1, end)
-        return nums
+    def quicksort3(self,nums):
+        return [] if not nums else self.quicksort3([i for i in nums[1:] if i<nums[0]])+nums[0:1]+self.quicksort3([i for i in nums[1:] if i>=nums[0]])
 
 
 s = Solution()
-a=[2, 6, 3, 8, 1, 7, 4, 9, 5, 5, 6]
-print(s.quicksort(a,0,9))
+a = [2, 6, 3, 8, 1, 7, 4, 9, 5, 5, 6]
+print(s.quicksort3(a))
 print(a)

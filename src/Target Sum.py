@@ -24,6 +24,7 @@ The length of the given array is positive and will not exceed 20.
 The sum of elements in the given array will not exceed 1000.
 Your output answer is guaranteed to be fitted in a 32-bit integer.
 """
+import time
 
 
 class Solution:
@@ -35,20 +36,21 @@ class Solution:
         """
         if not nums:
             return 0
-        ans = 0
-        q = [[], [-nums[0], nums[0]]]
-        for i in range(1, len(nums)):
-            t = []
-            for e in q[1]:
-                t.append(e + nums[i])
-                t.append(e - nums[i])
-            q[0] = q[1]
-            q[1] = t
-        for e in q[-1]:
-            if e == S:
-                ans += 1
-        return ans
+
+        def recu(i, sum, ans):
+            if i == len(nums):
+                if sum == S:
+                    ans[0] += 1
+                return
+            recu(i + 1, sum + nums[i], ans)
+            recu(i + 1, sum - nums[i], ans)
+
+        ans = [0]
+        recu(0, 0, ans)
+        return ans[0]
 
 
 s = Solution()
-print(s.findTargetSumWays([29,6,7,36,30,28,35,48,20,44,40,2,31,25,6,41,33,4,35,38], 35))
+print(time.time())
+print(s.findTargetSumWays([29, 6, 7, 36, 30, 28, 35, 48, 20, 44, 40, 2, 31, 25, 6, 41, 33, 4, 35, 38], 35))
+print(time.time())

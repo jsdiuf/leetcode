@@ -36,10 +36,19 @@ class Solution(object):
         """
         if not nums:
             return 1
-        mn, mx = 0, float('inf')
+        dic = {}
         for e in nums:
-            if e < mn:
+            if e <= 0:
                 continue
-            if e == mn:
-                mn += 1
-            # elif
+            dic[e] = 1
+
+        index = 1
+        while 1:
+            if index in dic:
+                index += 1
+            else:
+                return index
+
+
+s = Solution()
+print(s.firstMissingPositive([7, 8, 9, 11, 12]))

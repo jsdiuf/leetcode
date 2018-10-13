@@ -292,7 +292,44 @@ class BRTree:
 
     def deleteFixUp(self, node):
 
-        pass
+        if node == node.parent.left:  # 父节点的左子节点
+            w = node.parent.right
+            if w.color == Color.RED:  # 兄弟节点为红
+                w.color = Color.BLACK
+                node.parent.color = Color.RED
+                self.left_roate(node.parent)
+                self.deleteFixUp(node)
+            if w.left.color == Color.BLACK and w.right.color == Color.BLACK:
+                w.color = Color.RED
+                self.deleteFixUp(node.parent)
+            else:
+                if w.right.color.Color.BLACK:
+                    w.left.color = Color.BLACK
+                    w.color = Color.RED
+                    self.left_roate(w)
+                w.color = node.parent.color
+                node.parent.color = Color.BLACK
+                w.right.color = Color.BLACK
+                self.left_roate(node.parent)
+        else:                         #父节点的右子节点
+            w = node.parent.left
+            if w.color == Color.RED:  # 兄弟节点为红
+                w.color = Color.BLACK
+                node.parent.color = Color.RED
+                self.right_roate(node.parent)
+                self.deleteFixUp(node)
+            if w.left.color == Color.BLACK and w.right.color == Color.BLACK:
+                w.color = Color.RED
+                self.deleteFixUp(node.parent)
+            else:
+                if w.left.color.Color.BLACK:
+                    w.right.color = Color.BLACK
+                    w.color = Color.RED
+                    self.right_roate(w)
+                w.color = node.parent.color
+                node.parent.color = Color.BLACK
+                w.left.color = Color.BLACK
+                self.right_roate(node.parent)
 
 
 t = BRTree()

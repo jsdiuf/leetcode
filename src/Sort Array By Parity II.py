@@ -32,18 +32,19 @@ class Solution:
         :type A: List[int]
         :rtype: List[int]
         """
-        odd = []  # j
-        ev = []  # o
+        odd = []  # 奇数
+        even = []  # 偶数
         for i in range(len(A)):
             if A[i] & 1 == 0:
                 odd.append(A[i])
             else:
-                ev.append(A[i])
+                even.append(A[i])
         ans = []
         for i in range(len(odd)):
             ans.append(odd[i])
-            ans.append(ev[i])
+            ans.append(even[i])
         return ans
+        return [(odd[i],even[i]) for i in range(len(odd))]
 
 
 s = Solution()

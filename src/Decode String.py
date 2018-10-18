@@ -27,12 +27,13 @@ class Solution:
         :type s: str
         :rtype: str
         """
-
+        if not s:
+            return s
         s = list(s)
         stack = []
         for c in s:
             if c.isalpha():
-                if not stack or (str(stack[-1])).isdigit():
+                if not stack or not stack[-1].isalpha():
                     stack.append(c)
                 else:
                     stack[-1] += c
@@ -42,16 +43,19 @@ class Solution:
                 else:
                     stack[-1] *= 10
                     stack[-1] += int(c)
+            if c == '[':
+                stack.append('[')
             if c == ']':
                 s = stack.pop()
+                stack.pop()
                 n = stack.pop()
-                if not stack:
+                if not stack or not stack[-1].isalpha():
                     stack.append(s * n)
                     continue
-                if stack[-1].isalpha():
-                    stack[-1] += s * n
+                stack[-1] += s * n
         return stack[0]
 
 
+# 3[z]2[2[y]pq4[2[jk]e1[f]]]ef
 s = Solution()
-print(s.decodeString("2[ab3[e2[r]]]"))
+print(s.decodeString("2[abc]3[cd]ef"))

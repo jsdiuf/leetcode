@@ -34,8 +34,7 @@ class MyQueue:
         """
         Initialize your data structure here.
         """
-        stack=[]
-
+        self.stack = []
 
     def push(self, x):
         """
@@ -43,18 +42,25 @@ class MyQueue:
         :type x: int
         :rtype: void
         """
+        self.stack.append(x)
 
     def pop(self):
         """
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
+        if self.stack:
+            t = self.stack[0]
+            del self.stack[0]
+            return t
 
     def peek(self):
         """
         Get the front element.
         :rtype: int
         """
+        if self.stack:
+            return self.stack[0]
 
     def empty(self):
         """
@@ -62,9 +68,18 @@ class MyQueue:
         :rtype: bool
         """
 
+        return len(self.stack) == 0
+
+
 # Your MyQueue object will be instantiated and called as such:
 obj = MyQueue()
+print(obj.empty())
 obj.push(1)
-param_2 = obj.pop()
-param_3 = obj.peek()
-param_4 = obj.empty()
+obj.push(2)
+print(obj.empty())
+print(obj.peek())
+print(obj.pop())
+print(obj.peek())
+print(obj.pop())
+print(obj.pop())
+print(obj.stack)

@@ -26,6 +26,8 @@ Your output answer is guaranteed to be fitted in a 32-bit integer.
 """
 import time
 
+from scipy._lib.six import xrange
+
 
 class Solution:
     def findTargetSumWays(self, nums, S):
@@ -34,23 +36,25 @@ class Solution:
         :type S: int
         :rtype: int
         """
-        if not nums:
-            return 0
+        if not nums: return 0
 
-        def recu(i, sum, ans):
-            if i == len(nums):
-                if sum == S:
-                    ans[0] += 1
-                return
-            recu(i + 1, sum + nums[i], ans)
-            recu(i + 1, sum - nums[i], ans)
+        total = sum(nums)
+        if not -total <= S <= total or (total - S) % 2 == 1: return 0
 
-        ans = [0]
-        recu(0, 0, ans)
-        return ans[0]
+        # Note all the possible sums we can get are symmetric,
+        # i.e. if there are n ways to get a sum S, there must
+        # also be n ways to get -S.
+        target = (total - S) // 2
+        dp = [0] * (target + 1)
+        dp[0] = 1  # when S == total
+
+        for num in nums:
+            for i in range(target, num - 1, -1):
+                dp[i] += dp[i - num]
+        return dp[target]
 
 
 s = Solution()
 print(time.time())
-print(s.findTargetSumWays([29, 6, 7, 36, 30, 28, 35, 48, 20, 44, 40, 2, 31, 25, 6, 41, 33, 4, 35, 38], 35))
+print(s.findTargetSumWays([1], 1))
 print(time.time())

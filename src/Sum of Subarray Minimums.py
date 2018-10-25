@@ -31,24 +31,11 @@ class Solution:
         :rtype: int
         """
         L = len(A)
-        A.sort()
 
-        jc = [0]
-        t = 1
-        for i in range(1, L + 1):
-            t *= i
-            jc.append(t)
+        ans=0
+        for i in range(L):
+            pass
 
-        def helper(n, m):
-            return jc[n] / (jc[n - m] * jc[m])
-
-        M = 2
-        for i in range(1, L - 1):
-            M += helper(L - 1, i)
-        ans = 0
-        for e in A:
-            ans += e * M
-        return ans % (10 ** 9 + 7)
 
 
 s = Solution()

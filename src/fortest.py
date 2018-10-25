@@ -1,3 +1,4 @@
-a=['asd',12,3,'2']
-b=[]
-print(b[-1])
+from scipy._lib.six import xrange
+
+for i in xrange(10, 0, -1):
+    print(i)

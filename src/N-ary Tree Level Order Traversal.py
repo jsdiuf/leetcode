@@ -58,3 +58,16 @@ class Solution(object):
         helper()
         return res
 
+    def levelOrder2(self, root):
+        if not root:
+            return []
+        q = [root]
+        out = []
+        while len(q):
+            tmp = []
+            out.append([])
+            for x in q:
+                out[-1].append(x.val)
+                tmp.extend([c for c in x.children])
+            q = tmp
+        return out

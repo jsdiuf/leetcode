@@ -1,4 +1,2 @@
-from scipy._lib.six import xrange
-
-for i in xrange(10, 0, -1):
-    print(i)
+mn=12
+print(min(1,2,3))

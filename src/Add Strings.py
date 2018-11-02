@@ -25,7 +25,7 @@ class Solution:
        4567
         """
 
-        p1, p2 = len(num1) - 1, len(num2)  - 1
+        p1, p2 = len(num1) - 1, len(num2) - 1
         carry = 0
         ans = ""
         while carry or p1 >= 0 or p2 >= 0:

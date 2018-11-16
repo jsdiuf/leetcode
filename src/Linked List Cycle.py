@@ -31,13 +31,12 @@ class Solution(object):
         dummy.next = head
         fast, slow = dummy, dummy
 
-        while fast:
-            if not fast.next or not fast.next.next:
-                return False
+        while fast and fast.next and fast.next.next:
             fast = fast.next.next
             slow = slow.next
             if fast == slow:
                 return True
+        return False
 
         #40ms
         def hasCycle2(self, head):

@@ -1,2 +1,2 @@
 # leetcode
-[leetcode习题练习](https://leetcode.com)
+[leetcode习题练习](https://leetcode.com/jsdiuf/)

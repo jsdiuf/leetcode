@@ -35,6 +35,9 @@ class Solution:
         :rtype: str
         """
 
+        #import itertools
+        #print(list(itertools.permutations([1, 2, 3, 4])))
+
         arr = []
 
         def valid(item):

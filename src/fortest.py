@@ -1,3 +1,2 @@
-a=[1,2,3]
-del a[1]
-print(a)
+import itertools
+print(list(itertools.permutations([1,2,3,4])))

@@ -32,7 +32,6 @@ class Solution(object):
                 i = mid
         return -1
 
-
     def serarch2(self,nums,target):
         if len(nums) == 0:
             return -1

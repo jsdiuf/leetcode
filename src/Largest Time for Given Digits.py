@@ -41,6 +41,7 @@ class Solution:
         arr = []
 
         def valid(item):
+
             if item[0] >= 3:
                 return False
             if item[0] == 2 and item[1] >= 4:

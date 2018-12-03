@@ -53,6 +53,7 @@ class Solution:
         ans = [0 for _ in range(len(deck))]
         ans[0] = deck[0]
         index = 0
+
         def next(index):
             while 1:
                 index = (index + 1) % len(deck)

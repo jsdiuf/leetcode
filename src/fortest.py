@@ -1,2 +1,3 @@
-import itertools
-print(list(itertools.permutations([1,2,3,4])))
+a=[1,2,3,4]
+a.sort(reverse=True)
+print(a)

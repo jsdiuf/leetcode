@@ -303,7 +303,7 @@ class BRTree:
                 w.color = Color.RED
                 self.deleteFixUp(node.parent)
             else:
-                if w.right.color.Color.BLACK:
+                if w.right.color==Color.BLACK:
                     w.left.color = Color.BLACK
                     w.color = Color.RED
                     self.left_roate(w)

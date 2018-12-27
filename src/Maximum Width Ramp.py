@@ -55,7 +55,7 @@ class Solution:
             ret = 0
             while i < len(s) and s[i][0] <= A[index]:
                 ret = max(ret, index - s[i][1])
-                i+=1
+                i += 1
             return ret
 
         for i in range(1, len(A)):
@@ -68,7 +68,19 @@ class Solution:
 
         return ans
 
+    # nice
+    def maxWidthRamp2(self, A):
+        table = [(a, i) for i, a in enumerate(A)]
+        table.sort()
+
+        imin = float('Inf')
+        res = 0
+        for a, i in table:
+            res = max(res, i - imin)
+            imin = min(imin, i)
+
+        return res
 
 
 s = Solution()
-print(s.maxWidthRamp([6,0,8,2,1,5]))
+print(s.maxWidthRamp2([9, 8, 1, 0, 1, 9, 4, 0, 4, 1]))

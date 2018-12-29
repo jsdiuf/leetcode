@@ -42,6 +42,21 @@ class Solution:
             arr.append(arr[-1] + arr[-2])
         return arr[-1]
 
+    def climbStairs2(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # return n if n < 3 else self.climbStairs(n - 1) + self.climbStairs(n - 2)
+
+        if n < 3:
+            return n
+        arr = [1, 2]
+        for i in range(n - 2):
+            # arr.append(arr[-1] + arr[-2])
+            arr[0], arr[1] = arr[1], arr[0] + arr[1]
+        return arr[1]
+
 
 s = Solution()
 print(s.climbStairs(35))

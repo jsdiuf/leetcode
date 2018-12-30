@@ -44,12 +44,16 @@ class Solution:
         """
         if not root:
             return True
-        if root.left and root.val != root.val:
-            return False
-        if root.right and root.right.val != root.val:
-            return False
-        return self.isUnivalTree(root.left) and self.isUnivalTree(root.right)
 
+        def helper(n, v):
+            if not n:
+                return True
+            if n.val != v: return False
+            return helper(n.left, v) and helper(n.right, v)
+
+        return helper(root, root.val)
+
+    def isUnivalTree2(self, root):
         arr = []
 
         def helper(node, arr):
@@ -59,7 +63,6 @@ class Solution:
                 helper(node.right)
 
         helper(root, arr)
-
         for i in range(1, len(arr)):
             if arr[i] != arr[0]:
                 return False

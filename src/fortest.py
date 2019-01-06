@@ -1,3 +1,2 @@
-a="abc"
-print(a.replace('a','z'))
-print(a)
+a=[1,2,3]
+print(a[:2][::-1])
